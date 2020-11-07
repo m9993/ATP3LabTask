@@ -13,13 +13,13 @@ router.post('/', (req, res)=>{
 		['3', 'xyz', 'xyz@gmail.com', '123']
 	];
 	
-	if(req.session.userlist==undefined){
+	if(req.cookies['userlist']==undefined){
 		req.session.userlist=userlist;
+		res.cookie('userlist',req.session.userlist);
 	}else{
 		req.session.userlist=req.cookies['userlist'];
 	}
 
-	res.cookie('userlist',req.session.userlist);
 
 	/* 
 		--------COOKIE------(cookie clears automatically when browser is closed)---------
