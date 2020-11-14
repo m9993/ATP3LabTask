@@ -58,5 +58,12 @@ module.exports= {
 				callback(false);
 			}
 		});
+	},
+	search: function(searchKey, callback){
+		var sql="select * from user where name like '%"+searchKey+"%'";
+		db.getResults(sql, (results)=>{
+			callback(results);
+		});
+
 	}
 }

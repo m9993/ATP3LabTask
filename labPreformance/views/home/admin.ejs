@@ -2,6 +2,10 @@
 <html>
 <head>
 	<title>Admin</title>
+	<link rel="stylesheet" type="text/css" href="/abc/css/style.css">
+	<style>
+		input{margin-left: 193px;}
+	</style>
 </head>
 <body>
 	<h1>Admin Home</h1>
@@ -11,6 +15,9 @@
 	<h5>USER:</h5>
 	<a href="/user/create">Create User</a>
 	| <a href="/logout">logout</a> 
+	
+	<input type="text" name="search" placeholder="search by name" id="searchKey">
+	
 	<br>
 
 	<table border="1">
@@ -35,7 +42,7 @@
 
 		<% } %> -->
 
-		<% 
+		<%
 			users.forEach( function(std){ %>
 			<tr>
 				<td><%= std.id %></td>
@@ -55,6 +62,69 @@
 		%>
 		
 	</table>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(()=>{
+			$('#searchKey').on('keyup',()=>{
+			var key= $('#searchKey').val();
+				$.ajax({
+					type: 'get',
+					url:"/user/search",
+					data: {searchKey: key},
+					success:(res)=>{
+						// alert(users=res.users);
+						
+						var data="<tr>"+
+								"<td>Id</td>"+
+								"<td>Name</td>"+
+								"<td>Company Name</td>"+
+								"<td>Contact no</td>"+
+								"<td>Username</td>"+
+								"<td>Role</td>"+
+								"<td colspan='2'>Configaration</td>"+
+							"</tr>";
+						res.users.forEach( function(std){
+						var row=
+						'<tr>'+
+							'<td>'+std.id+'</td>'+
+							'<td>'+std.name+'</td>'+
+							'<td>'+std.companyname+'</td>'+
+							'<td>'+std.contactno+'</td>'+
+							'<td>'+std.username+'</td>'+
+							'<td>'+std.role+'</td>'+
+							'<td>'+
+								"<a href='/user/edit/"+std.id+"'>Edit</a> |"+
+								"<a href='/user/delete/"+std.id+"'>Delete</a>"+
+							'</td>'+
+						'</tr>';
+						data+=row;
+						}); 
+						
+						$('table').html(data);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					},
+					error:(res)=>{alert('Error serching!!!!!!!!');}
+
+				});
+			});
+
+		});
+	</script>
 </body>
 </html>

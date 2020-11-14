@@ -76,5 +76,13 @@ router.post('/delete/:id', (req, res)=>{
 	});
 });
 
+router.get('/search', (req, res)=>{
+	var searchKey= req.query.searchKey;
+	userModel.search(searchKey,(results)=>{
+		// console.log(results);
+		res.json({users: results});
+	});
+});
+
 module.exports = router;
 
