@@ -33,5 +33,31 @@ module.exports={
 			callback(results);
         });
     },
+	getById: function(uid, callback){
+		var sql = "select * from user where uid= '"+uid+"'";
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+    },
+    update: function(user,callback){
+        var sql="UPDATE `user` SET `uname`='"+user.uname+"',`uemail`='"+user.uemail+"',`urole`='"+user.urole+"',`ustatus`='"+user.ustatus+"',`upassword`='"+user.upassword+"',`uphone`='"+user.uphone+"' WHERE uid='"+user.uid+"'";
+        db.execute(sql,(status)=>{
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+    },
+    delete: function(uid, callback){
+		var sql="DELETE FROM user WHERE uid='"+uid+"'";
+		db.execute(sql,(status)=>{
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
 
 }

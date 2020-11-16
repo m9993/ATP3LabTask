@@ -17,9 +17,15 @@
     <h4 class="mt-5 text-danger">Customer</h4>
     <h4 class="mb-5 d-inline">Welcome, <%=user.uname%> </h4>
 
-    <a href="/logout" class="float-right h4 mr-5 mb-5">
-      <i class="fas fa-power-off"></i>
-    </a>
+    <div class="float-right h6">
+      <a href="/user/edit/customer/<%= user.uid %>" class="mr-5">
+        <i class="fas fa-edit"></i>Profile
+      </a>
+      <a href="/logout" class="text-danger">
+        <i class="fas fa-power-off  pr-1"></i>Logout
+      </a>
+    </div>
+
 
 
     <h5 class="mt-5">Medicine:</h5>

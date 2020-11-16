@@ -17,9 +17,14 @@
     <h4 class="mt-5 text-danger">Admin</h4>
     <h4 class="mb-5 d-inline">Welcome, <%=user.uname%> </h4>
 
-    <a href="/logout" class="float-right h4 mr-5 mb-5">
-      <i class="fas fa-power-off"></i>
-    </a>
+    <div class="float-right h6">
+      <a href="/user/edit/admin/<%= user.uid %>" class="mr-5">
+        <i class="fas fa-edit"></i>Profile
+      </a>
+      <a href="/logout" class="text-danger">
+        <i class="fas fa-power-off  pr-1"></i>Logout
+      </a>
+    </div>
 
 
     <h5 class="mt-5">Users:</h5>
@@ -50,8 +55,8 @@
           <td><%= std.urole %></td>
           <td><%= std.ustatus %></td>
           <td colspan="2">
-            <a href="/user/edit/<%= std.uid %>"><i class="fas fa-edit text-warning mr-3"></i></i></a> |
-            <a href="/user/delete/<%= std.uid %>"><i class="fas fa-trash-alt text-danger ml-3"></i></a>
+            <a href="/user/edit/admin/<%= std.uid %>"><i class="fas fa-edit text-warning mr-3"></i></a> |
+            <a href="/user/delete/admin/<%= std.uid %>"><i class="fas fa-trash-alt text-danger ml-3"></i></a>
           </td>
         </tr>
 
