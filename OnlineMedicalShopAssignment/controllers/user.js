@@ -12,11 +12,16 @@ router.get('*',  (req, res, next)=>{
 	}
 });
 
-router.get('/admin',(req, res)=>{
-    res.render('admin/home', {user: req.session.user});
+router.get('/vuser/adminHome',(req, res)=>{
+	userModel.getAllUser((results)=>{
+		res.render('vuser/adminHome', {user: req.session.user, allUser: results});
+	});
 });
-router.get('/customer',(req, res)=>{
-    res.render('customer/home', {user: req.session.user});
+router.get('/vuser/customerHome',(req, res)=>{
+    res.render('vuser/customerHome', {user: req.session.user});
+});
+router.get('/addUser',(req, res)=>{
+    res.render('vuser/addUser', {user: req.session.user});
 });
 
 

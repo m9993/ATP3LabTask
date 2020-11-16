@@ -34,11 +34,11 @@ router.post('/', [
           userModel.getUser(user, (results)=>{
             if(results[0].urole=='admin' && results[0].ustatus=='valid'){
               req.session.user=results[0];
-              res.redirect('/user/admin');
+              res.redirect('/user/vuser/adminHome');
             }
             else if(results[0].urole=='customer' && results[0].ustatus=='valid'){
               req.session.user=results[0];
-              res.redirect('/user/customer');
+              res.redirect('/user/vuser/customerHome');
             }
             else{
               res.send("You don't have permission to login");
