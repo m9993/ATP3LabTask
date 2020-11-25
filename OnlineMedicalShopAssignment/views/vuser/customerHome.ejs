@@ -27,6 +27,13 @@
     </div>
 
 
+    <div class="card my-4 alert-warning">
+      <div class="card-body pt-2 pb-1 h6">
+        <a class='mx-2' href="/medicine/vuser/customerHome">Home </a>|
+        <a class='mx-2' href="" data-toggle="modal" data-target="#cart">Cart </a>|
+        <a class='mx-2' href="/order/vorder/customerOrder">Orders </a>
+      </div>
+    </div>
 
     <h5 class="mt-5">Medicine:</h5>
     <table class="table table-hover">
@@ -35,25 +42,133 @@
           <th scope="col">mid</th>
           <th scope="col">mname</th>
           <th scope="col">mgenre</th>
-          <th scope="col">mquantity</th>
           <th scope="col">mprice</th>
           <th scope="col">mstatus</th>
+          <th scope="col">action</th>
           
         </tr>
       </thead>
       <tbody>
+
+        <%
+        medicine.forEach( function(std){ %>
         <tr>
-          <th scope="row"></th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <th scope="row"><%= std.mid %></th>
+          <td><%= std.mname %></td>
+          <td><%= std.mgenre %></td>
+          <td><%= std.mprice %></td>
+          <td><%= std.mstatus %></td>
+          <td>
+            <a href="/medicine/add-to-cart/<%= std.mid %>"><button class="btn btn-primary">Add to cart</button></a>
+          </td>
         </tr>
+
+		<%
+			}); 
+		%>
+        
         
       </tbody>
     </table>
     
+
+
+
+
+    <!-- cart -->
+      <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Cart</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!--  -->
+              <%
+                var msg='Cart is empty. Please add products.';
+                if(typeof cartData=='undefined'){ %>
+                    <div class="container border text-center h6 py-5 text-secondary">
+                        <%= msg %>
+                    </div>
+                <% } %>
+
+
+                <%
+                if(typeof cartData!='undefined'){ var totalPrice=0; %>
+                <table class="table-hover">
+                <%
+                cartData.forEach( function(i){ %>
+                <tr class="border">
+                    <td class="px-2 pt-2">
+                        <h6> Product Id-<%= i.storedId %> </h6>
+                    </td>
+                    <td class="px-2 pt-2">    
+                        <h6> <%= i.storedName %> </h6>
+                    </td>
+                    <td class="px-3 pl-5">
+                        <h6><span class="badge badge-success"><%= i.storedPrice %> ৳</span></h6>
+                    </td>
+                    <td class="px-2 pt-1">
+                        <h5><span>
+                            <a href='/medicine/addByOne/<%= i.storedId %>' class="text-dark"><i class="fas fa-caret-square-up"></i></a>
+                            <a href='/medicine/reduceByOne/<%= i.storedId %>' class="text-dark ml-1"><i class="fas fa-caret-square-down"></i></a>
+                        </span>
+                        </h5>
+                    </td>
+                    <td class="px-3">
+                        <h6><span class="badge badge-primary"> <%= i.storedQty %> </span></h6>
+                    </td>
+                </tr>
+                   
+                
+                    
+                <% 
+                totalPrice+=i.storedPrice }); %> 
+                <h5 class="mb-2">Total Price:  <span class="text-danger"> <%= totalPrice %> Taka</span></h5>
+                </table> 
+                <div class="px-5 mt-5">
+                <form class="border shadow p-4" method="post" action="/order/addOrder">
+                    <h3 class="mb-3">Order</h3>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Address" name='oaddress'>
+                    </div>
+                    <div class="form-group">
+                        <input name="oamount" class="form-control" type="text" placeholder="Readonly input here…" readonly value="<%= totalPrice %>">
+                    </div>
+                    <div class="form-group">
+                      <select name="opaymentmethod" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                          <option selected disabled>Ship method...</option>
+                          <option value="bkash">BKash</option>
+                          <option value="rocket">Rocket</option>
+                        </select>
+                  </div>
+                
+                </div>
+                <%
+                }
+                
+                %>
+              <!--  -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Buy now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </form>
+
+    <!-- cart -->
+
+
+
+
+
+
     
   </div>
 

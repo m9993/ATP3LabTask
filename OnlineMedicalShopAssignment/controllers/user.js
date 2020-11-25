@@ -17,9 +17,6 @@ router.get('/vuser/adminHome',(req, res)=>{
 		res.render('vuser/adminHome', {user: req.session.user, allUser: results});
 	});
 });
-router.get('/vuser/customerHome',(req, res)=>{
-    res.render('vuser/customerHome', {user: req.session.user});
-});
 router.get('/addUser',(req, res)=>{
     res.render('vuser/addUser', {user: req.session.user});
 });

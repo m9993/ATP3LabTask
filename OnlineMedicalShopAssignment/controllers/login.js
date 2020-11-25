@@ -38,7 +38,7 @@ router.post('/', [
             }
             else if(results[0].urole=='customer' && results[0].ustatus=='valid'){
               req.session.user=results[0];
-              res.redirect('/user/vuser/customerHome');
+              res.redirect('/medicine/vuser/customerHome');
             }
             else{
               res.send("You don't have permission to login");

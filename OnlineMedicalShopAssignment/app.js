@@ -8,7 +8,9 @@ const {body, validationResult} 		= require('express-validator');
 const login							= require('./controllers/login');
 const logout						= require('./controllers/logout');
 const user							= require('./controllers/user');
-const registration							= require('./controllers/registration');
+const medicine						= require('./controllers/medicine');
+const order							= require('./controllers/order');
+const registration					= require('./controllers/registration');
 
 const app							= express();
 const port							= 3000;
@@ -28,6 +30,8 @@ app.use('/', login);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/user', user);
+app.use('/medicine', medicine);
+app.use('/order', order);
 app.use('/registration', registration);
 
 

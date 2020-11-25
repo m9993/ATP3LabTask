@@ -14,73 +14,37 @@
   <body>
     
   <div class="container mt-5">
-    <h4 class="mt-5 text-danger">Admin</h4>
-    <h4 class="mb-5 d-inline">Welcome, <%=user.uname%> </h4>
-
-    <div class="float-right h6">
-      <a href="/user/edit/admin/<%= user.uid %>" class="mr-5">
-        <i class="fas fa-edit"></i>Profile
-      </a>
-      <a href="/logout" class="text-danger">
-        <i class="fas fa-power-off  pr-1"></i>Logout
-      </a>
-    </div>
-
-    <div class="card my-4 alert-warning">
-      <div class="card-body pt-2 pb-1 h6">
-        <a class='mx-2' href="/user/vuser/adminHome">Home </a>|
-        <a class='mx-2' href="/medicine/vmedicine/adminMedicine">Medicine </a>|
-        <a class='mx-2' href="/order/vorder/adminOrder">Orders </a>
-      </div>
-    </div>
-
-
-
-    <h5 class="">Users:</h5>
-    <a href="/registration/admin"><i class="fa fa-plus-square h3" aria-hidden="true"></i></a>
-    <table class="table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">uid</th>
-          <th scope="col">uname</th>
-          <th scope="col">uphone</th>
-          <th scope="col">uemail</th>
-          <th scope="col">urole</th>
-          <th scope="col">ustatus</th>
-          <th scope="col">action</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-
-
-        <%
-        allUser.forEach( function(std){ %>
-        <tr>
-          <th scope="row"><%= std.uid %></th>
-          <td><%= std.uname %></td>
-          <td><%= std.uphone %></td>
-          <td><%= std.uemail %></td>
-          <td><%= std.urole %></td>
-          <td><%= std.ustatus %></td>
-          <td colspan="2">
-            <a href="/user/edit/admin/<%= std.uid %>"><i class="fas fa-edit text-warning mr-3"></i></a> |
-            <a href="/user/delete/admin/<%= std.uid %>"><i class="fas fa-trash-alt text-danger ml-3"></i></a>
-          </td>
-        </tr>
-
-		<%
-			}); 
-		%>
-
-
-
-       
-        
-      </tbody>
-    </table>
+    <div class="h3">Edit Medicine:</div>
     
+    <!-- model edit medicine -->
+<form method="POST" action="/medicine/editMedicine/<%=editMedicine.mid%>">
     
+            <!--  -->
+            <div class="form-group">
+              <label for="mname">mname</label>
+              <input type="" class="form-control" id="mname" name="mname" value="<%= editMedicine.mname %>">
+            </div>
+            <div class="form-group">
+              <label for="mgenre">mgenre</label>
+              <input class="form-control" id="mgenre" name="mgenre" value="<%= editMedicine.mgenre %>">
+            </div>
+            <div class="form-group">
+              <label for="mprice">mprice</label>
+              <input class="form-control" id="mprice" name="mprice" value="<%= editMedicine.mprice %>">
+            </div>
+            <div class="form-group">
+              <label for="">mstatus</label>
+              <select class="form-control" name="mstatus">
+                <option <% var s='selected'; if(editMedicine.mstatus=='available'){ %> <%= s %> <% } %> value="available">Available</option>
+                <option <% var s='selected'; if(editMedicine.mstatus=='not available'){ %> <%= s %> <% } %> value="not available">Not available</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <!--  -->
+         
+    </form>
+        <!-- model edit medicine -->
+
   </div>
 
 
