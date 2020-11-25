@@ -112,6 +112,16 @@ router.get('/reduceByOne/:mid', (req, res)=>{
         
     });
 });
+router.get('/customer/search', (req, res)=>{
+	var search={	
+		mSearchKey:req.query.mSearchKey,
+		mSearchFilter:req.query.mSearchFilter,
+	};
+	medicineModel.search(search,(results)=>{
+		res.json({medicine: results});
+		// console.log(results);
+	});
+});
 
 
 module.exports = router;

@@ -42,6 +42,13 @@ module.exports={
 				callback(false);
 			}
         });
-    },
+	},
+	search: function(search, callback){
+		var sql="select * from medicine where "+search.mSearchFilter+" like '%"+search.mSearchKey+"%'";
+		db.getResults(sql, (results)=>{
+			callback(results);
+		});
+
+	}
 
 }
